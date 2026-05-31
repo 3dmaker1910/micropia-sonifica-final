@@ -1,0 +1,50 @@
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Image } from 'react-native';
+import { Audio } from 'expo-av';
+import { MicraAI } from './components/MicraAI';
+
+// HIMNO DE MICROPIA (JINGLE) INTEGRADO
+const JINGLE_URL = 'https://suno.com/song/807c584d-e9cb-4b00-8cf7-6b9b9492d285';
+
+export default function App() {
+  const [sound, setSound] = useState();
+
+  async function playSound(frequency) {
+    console.log('Reproduciendo frecuencia: ' + frequency);
+    // Lógica para generar sonido electrónico basado en frecuencia
+    const { sound } = await Audio.Sound.createAsync(
+       { uri: 'https://www.soundjay.com/buttons/beep-01a.mp3' } // Placeholder para sonido real
+    );
+    setSound(sound);
+    await sound.playAsync();
+  }
+
+  useEffect(() => {
+    return sound ? () => { sound.unloadAsync(); } : undefined;
+  }, [sound]);
+
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>MICROPIA M104</Text>
+        <Text style={styles.subtitle}>Sinfonía Microbiana - El Sonido de la Vida</Text>
+      </View>
+
+      <View style={styles.tabContainer}>
+        {/* Aquí van tus 4 pestañas neón */}
+        <Text style={styles.neonText}>[ GALERÍA ] [ FRECUENCIAS ] [ INFOGRAFÍAS ] [ DRA. MICRA ]</Text>
+      </View>
+
+      {/* Micra AI Guiding the Tour */}
+      <MicraAI message="¡Bienvenido a la Sinfonía! Toca cada microorganismo para escuchar la música de su existencia." />
+    </ScrollView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor: '#000814' },
+  header: { padding: 40, alignItems: 'center' },
+  title: { color: '#00FFFF', fontSize: 32, fontWeight: 'bold' },
+  subtitle: { color: '#FF00FF', fontSize: 16 },
+  neonText: { color: '#CCFF00', margin: 20, textAlign: 'center' }
+});
