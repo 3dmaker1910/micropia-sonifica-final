@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "Micropia Sinfonía",
+    "slug": "micropia-m104",
+    "version": "1.0.0",
+    "platforms": ["web"],
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
